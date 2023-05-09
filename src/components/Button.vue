@@ -19,14 +19,23 @@ export default {
 .button {
   padding: 10px 30px;
   font-size: 16px;
-  background: #006c67;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
+  font-weight: 600;
+  background: transparent;
+  width: 190px;
+  color: $orange-50;
+  border: 2.5px solid $orange-50;
+  border-radius: 30px;
   cursor: pointer;
 
   &:hover {
-    filter: opacity(0.7);
+    animation: changeColor 0.5s ease-in-out forwards;
+  }
+}
+
+@keyframes changeColor {
+  100% {
+    background: $orange-50;
+    color: $secondary;
   }
 }
 </style>
