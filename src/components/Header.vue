@@ -23,19 +23,18 @@ export default {
 @import "@/scss/main.scss";
 
 .header {
-  background: $dark-green;
-  width: 100%;
   height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: $secondary;
+  padding: 0 75px;
 
   &__options {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 32px;
-    margin-right: 250px;
   }
 }
 </style>

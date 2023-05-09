@@ -39,7 +39,7 @@ export default {
     &__title {
       font-size: 32px;
       font-weight: bold;
-      color: $dark-green;
+      color: $brown-100;
       text-align: left;
     }
 

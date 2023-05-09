@@ -30,6 +30,6 @@ export default {
 }
 
 body {
-  background: $primary;
+  background: $background;
 }
 </style>
