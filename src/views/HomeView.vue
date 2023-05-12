@@ -20,6 +20,22 @@
         <h1>Cardápio</h1>
         <p>Onde você encontra todos os produtos, ordenados ou filtrados</p>
       </div>
+      <input
+        class="home__container__input"
+        type="text"
+        placeholder="Pesquise pelo nome do doce"
+      />
+      <div class="home__container__chips">
+        <Chip text="Boce de pote " />
+        <Chip text="Bolo" />
+        <Chip text="Sobremesa" />
+      </div>
+      <div class="home__container__items">
+        <product-card />
+        <product-card />
+        <product-card />
+        <product-card />
+      </div>
     </div>
   </div>
 </template>
@@ -27,10 +43,11 @@
 <script>
 import Carousel from "@/components/Carousel.vue";
 import ProductCard from "@/components/ProductCard.vue";
+import Chip from "@/components/Chip.vue";
 
 export default {
   name: "HomeView",
-  components: { Carousel, ProductCard },
+  components: { Carousel, ProductCard, Chip },
 };
 </script>
 
@@ -40,7 +57,7 @@ export default {
 .home {
   width: 100%;
   height: 100%;
-  padding-bottom: 150px;
+  padding-bottom: 180px;
 
   &__container {
     width: 100%;
@@ -78,6 +95,28 @@ export default {
       width: 300px;
       height: 2px;
       background: $yellow-100;
+    }
+
+    &__input {
+      width: 50%;
+      padding: 12px 24px;
+      background: transparent;
+      border-radius: 10px;
+      border: 2.5px solid $yellow-100;
+      margin-bottom: 16px;
+      font-size: 20px;
+      color: $brown-200;
+
+      &::placeholder {
+        color: $brown-200;
+        font-size: 20px;
+      }
+    }
+
+    &__chips {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 36px;
     }
   }
 }
