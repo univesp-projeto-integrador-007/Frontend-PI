@@ -3,13 +3,13 @@
     <div class="footer__container">
       <div class="footer__container__items">
         <div class="footer__container__items__item">
-          <Facebook />
+          <img src="@/assets/icon-whatsapp.svg" />
         </div>
         <div class="footer__container__items__item">
-          <Instagram />
+          <img src="@/assets/icon-instagram.svg" />
         </div>
         <div class="footer__container__items__item">
-          <Whatsapp />
+          <img src="@/assets/icon-facebook.svg" />
         </div>
       </div>
       <div class="footer__container__text">Copyright © D.Brigadeiros 2023</div>
@@ -18,13 +18,9 @@
 </template>
 
 <script>
-import Facebook from "@/assets/icon-facebook.svg";
-import Instagram from "@/assets/icon-instagram.svg";
-import Whatsapp from "@/assets/icon-whatsapp.svg";
-
 export default {
   name: "Footer",
-  components: { Facebook, Instagram, Whatsapp },
+  components: {},
 };
 </script>
 
@@ -56,6 +52,14 @@ export default {
         width: 40px;
         height: 40px;
         border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
       }
     }
 
