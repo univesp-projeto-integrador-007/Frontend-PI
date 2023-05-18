@@ -10,10 +10,13 @@
         </p>
       </div>
       <div class="home__container__items">
-        <product-card />
-        <product-card />
-        <product-card />
-        <product-card />
+        <div
+          v-for="product in emphasis"
+          :key="product._id"
+          @click="HandleProduct(product)"
+        >
+          <product-card :product="product" />
+        </div>
       </div>
       <div class="home__container__wrapper" />
       <div class="home__container__emphasis">
@@ -24,17 +27,21 @@
         class="home__container__input"
         type="text"
         placeholder="Pesquise pelo nome do doce"
+        v-model="filter"
       />
       <div class="home__container__chips">
-        <Chip text="Boce de pote " />
-        <Chip text="Bolo" />
-        <Chip text="Sobremesa" />
+        <div v-for="type in types" :key="type._id" @click="handleFilter(type)">
+          <Chip :text="type" />
+        </div>
       </div>
-      <div class="home__container__items">
-        <product-card />
-        <product-card />
-        <product-card />
-        <product-card />
+      <div id="cardapio" class="home__container__items">
+        <div
+          v-for="product in filteredProducts"
+          :key="product._id"
+          @click="HandleProduct(product)"
+        >
+          <product-card :product="product" />
+        </div>
       </div>
     </div>
   </div>
@@ -44,10 +51,61 @@
 import Carousel from "@/components/Carousel.vue";
 import ProductCard from "@/components/ProductCard.vue";
 import Chip from "@/components/Chip.vue";
+import axios from "axios";
 
 export default {
   name: "HomeView",
   components: { Carousel, ProductCard, Chip },
+  data() {
+    return {
+      filter: "",
+      products: [],
+      types: [],
+      emphasis: [],
+    };
+  },
+
+  async mounted() {
+    const types = [];
+    try {
+      const res = await axios.get("http://localhost:3000/api/products");
+      this.products = res.data;
+    } catch (err) {
+      console.log(err.response.data.msg);
+    }
+    this.products.forEach((el) => {
+      return types.push(el.type);
+    });
+    this.emphasis = this.products.filter((el) => el.isEmphasis);
+    this.types = this.itensUnicos(types);
+  },
+
+  methods: {
+    HandleProduct(value) {
+      this.$store.commit("storeCurrentProduct", value);
+      this.$router.push("/produtos");
+    },
+    handleFilter(value) {
+      this.filter = value;
+    },
+    itensUnicos(arr) {
+      return arr.filter((v, i, a) => a.indexOf(v) === i);
+    },
+  },
+  computed: {
+    filteredProducts() {
+      if (this.filter) {
+        const products = this.products.filter((product) => {
+          return (
+            product.name.toLowerCase().includes(this.filter.toLowerCase()) ||
+            product.type.toLowerCase().includes(this.filter.toLowerCase())
+          );
+        });
+        return products;
+      }
+      return this.products;
+    },
+  },
 };
 </script>
 
@@ -88,6 +146,7 @@ export default {
       justify-content: center;
       flex-wrap: wrap;
       gap: 21px;
+      cursor: pointer;
     }
 
     &__wrapper {
@@ -107,6 +166,9 @@ export default {
       font-size: 20px;
       color: $brown-200;
 
+      &:focus {
+        outline: none;
+      }
       &::placeholder {
         color: $brown-200;
         font-size: 20px;
