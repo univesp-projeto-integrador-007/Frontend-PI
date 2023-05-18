@@ -1,5 +1,5 @@
 <template>
-  <button class="button" :class="{ '--outline': true }">
+  <button class="button" :class="{ '--outline': true }" @click="handleClick()">
     {{ text }}
   </button>
 </template>
@@ -9,6 +9,11 @@ export default {
   name: "Button",
   props: {
     text: { type: String, default: "", required: true },
+  },
+  methods: {
+    handleClick() {
+      this.$emit("click");
+    },
   },
 };
 </script>
@@ -21,11 +26,11 @@ export default {
   font-size: 16px;
   font-weight: 600;
   background: transparent;
-  width: 190px;
   color: $orange-50;
   border: 2.5px solid $orange-50;
   border-radius: 30px;
   cursor: pointer;
+  flex-wrap: nowrap;
 
   &:hover {
     animation: changeColor 0.5s ease-in-out forwards;
