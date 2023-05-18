@@ -13,18 +13,42 @@ const routes = [
   {
     path: '/quem-somos',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: () => import('../views/AboutView.vue')
   },
   {
     path: '/produtos',
     name: 'products',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/ProductsView.vue')
+    component: () => import('../views/ProductView.vue')
+  },
+  {
+    path: '/carrinho',
+    name: 'cart',
+    component: () => import('../views/CartView.vue')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/LoginView.vue')
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => import('../views/AdminView.vue')
+  },
+  {
+    path: '/admin/pedidos',
+    name: 'pedidos',
+    component: () => import('../views/PedidosView.vue')
+  },
+  {
+    path: '/admin/produtos',
+    name: 'GerenciarProdutos',
+    component: () => import('../views/ManagerProductsView.vue')
+  },
+  {
+    path: '/sucesso',
+    name: 'Sucesso',
+    component: () => import('../views/SuccessView.vue')
   }
 ]
 
