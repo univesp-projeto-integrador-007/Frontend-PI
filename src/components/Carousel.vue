@@ -5,7 +5,9 @@
         <div class="one__container">
           <h1>A doceria onde o principal ingrediente é amor.</h1>
           <p>Feito com frutas selecionadas</p>
-          <Button text="Ver cardápio" />
+          <a href="#cardapio">
+            <Button text="Ver cardápio" />
+          </a>
         </div>
       </div>
       <div class="two"></div>
@@ -43,7 +45,7 @@ export default {
   justify-content: center;
   align-items: center;
 
-  @media (max-width: $desktop) {
+  @media (max-width: 1365px) {
     width: 55%;
   }
 
