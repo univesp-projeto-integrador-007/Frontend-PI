@@ -27,7 +27,7 @@ export default {
       if (!tokenArmazenado) {
         return this.$router.push("/");
       }
-      const res = await axios.get("http://localhost:3000/api/orders", {
+      const res = await axios.get(`${process.env.VUE_APP_BACKEND}api/orders`, {
         headers: {
           Authorization: `Bearer ${tokenArmazenado}`,
         },

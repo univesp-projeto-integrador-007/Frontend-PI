@@ -68,7 +68,7 @@ export default {
   async mounted() {
     const types = [];
     try {
-      const res = await axios.get("http://localhost:3000/api/products");
+      const res = await axios.get(`${process.env.VUE_APP_BACKEND}api/products`);
       this.products = res.data;
     } catch (err) {
       console.log(err.response.data.msg);

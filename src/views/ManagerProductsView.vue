@@ -68,7 +68,9 @@ export default {
   methods: {
     async getInfos() {
       try {
-        const res = await axios.get("http://localhost:3000/api/products");
+        const res = await axios.get(
+          `${process.env.VUE_APP_BACKEND}api/products`
+        );
         this.products = res.data;
       } catch (err) {
         console.log(err.response.data.msg);
@@ -79,11 +81,14 @@ export default {
     },
     async handleRemove(value) {
       try {
-        await axios.delete(`http://localhost:3000/api/products/${value}`, {
-          headers: {
-            Authorization: `Bearer ${this.token}`,
-          },
-        });
+        await axios.delete(
+          `${process.env.VUE_APP_BACKEND}api/products/${value}`,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`,
+            },
+          }
+        );
 
         this.getInfos();
       } catch (err) {
@@ -102,11 +107,15 @@ export default {
     },
     async AddProduct(payload) {
       try {
-        await axios.post(`http://localhost:3000/api/products/`, payload, {
-          headers: {
-            Authorization: `Bearer ${this.token}`,
-          },
-        });
+        await axios.post(
+          `${process.env.VUE_APP_BACKEND}api/products/`,
+          payload,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`,
+            },
+          }
+        );
 
         this.getInfos();
         this.handleModal(false);
@@ -117,7 +126,7 @@ export default {
     async EditProduct(payload) {
       try {
         await axios.put(
-          `http://localhost:3000/api/products/${payload.id}`,
+          `${process.env.VUE_APP_BACKEND}api/products/${payload.id}`,
           payload,
           {
             headers: {

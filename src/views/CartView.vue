@@ -144,7 +144,7 @@ export default {
           };
 
           const res = await axios.post(
-            "http://localhost:3000/api/orders",
+            `${process.env.VUE_APP_BACKEND}api/orders`,
             payload
           );
           this.$router.push("/sucesso");

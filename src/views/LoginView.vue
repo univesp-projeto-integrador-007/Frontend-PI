@@ -42,7 +42,7 @@ export default {
       };
       try {
         const res = await axios.post(
-          "http://localhost:3000/api/auth/login",
+          `${process.env.VUE_APP_BACKEND}api/auth/login`,
           payload
         );
         const token = res.data.token;
