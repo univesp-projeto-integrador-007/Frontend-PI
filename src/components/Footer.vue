@@ -3,13 +3,20 @@
     <div class="footer__container">
       <div class="footer__container__items">
         <div class="footer__container__items__item">
-          <img src="@/assets/icon-whatsapp.svg" />
+          <a
+            target="blank"
+            href="https://api.whatsapp.com/send?phone=5511953301438&fbclid=PAAabvT3K59FoitES-fq0YUz41mJ8Zxw6fq_TX2h2p2X6jjWasoPmZJCaPlyk  "
+          >
+            <img src="@/assets/icon-whatsapp.svg" />
+          </a>
         </div>
         <div class="footer__container__items__item">
-          <img src="@/assets/icon-instagram.svg" />
-        </div>
-        <div class="footer__container__items__item">
-          <img src="@/assets/icon-facebook.svg" />
+          <a
+            target="blank"
+            href="https://instagram.com/d.brigadeiros?igshid=MzRlODBiNWFlZA=="
+          >
+            <img src="@/assets/icon-instagram.svg" />
+          </a>
         </div>
       </div>
       <div class="footer__container__text">Copyright © D.Brigadeiros 2023</div>
