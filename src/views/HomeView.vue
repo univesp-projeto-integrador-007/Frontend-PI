@@ -147,6 +147,7 @@ export default {
       flex-wrap: wrap;
       gap: 21px;
       cursor: pointer;
+      max-width: 1200px;
     }
 
     &__wrapper {
