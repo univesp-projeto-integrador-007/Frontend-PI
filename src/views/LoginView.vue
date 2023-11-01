@@ -77,6 +77,8 @@ export default {
   &__container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   &__wrapper {
@@ -95,6 +97,7 @@ export default {
     margin-bottom: 16px;
     font-size: 20px;
     color: $brown-200;
+    box-sizing: border-box;
 
     @media (max-width: $tablet) {
       width: 90%;

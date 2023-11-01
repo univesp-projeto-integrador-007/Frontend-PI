@@ -65,7 +65,7 @@ export default {
   @media (max-width: $tablet) {
     flex-direction: column;
     gap: 25px;
-    padding: 50px 25px 150px;
+    padding: 50px 25px 200px;
   }
 
   &__container-image {
@@ -86,11 +86,19 @@ export default {
     padding-left: 50px;
     width: 100%;
 
+    @media (max-width: $tablet) {
+      padding: 0;
+    }
+
     &__type {
       font-family: "Cairo", sans-serif;
       font-weight: 700;
       font-size: 1.4rem;
       color: $brown-100;
+
+      @media (max-width: $tablet) {
+        font-size: 1.1rem;
+      }
     }
 
     &__title {
@@ -98,12 +106,20 @@ export default {
       font-weight: bold;
       color: $primary;
       text-align: left;
+
+      @media (max-width: $tablet) {
+        font-size: 1.6rem;
+      }
     }
 
     &__description {
       font-weight: 400;
       font-size: 1.3rem;
       color: $brown-200;
+
+      @media (max-width: $tablet) {
+        font-size: 1.1rem;
+      }
     }
 
     &__wrapper {
@@ -117,6 +133,10 @@ export default {
       font-weight: 600;
       font-size: 2.5rem;
       color: $brown-200;
+
+      @media (max-width: $tablet) {
+        font-size: 2rem;
+      }
     }
 
     &__old-value {
@@ -125,13 +145,21 @@ export default {
       color: $brown-100;
       margin-left: 15px;
       text-decoration: line-through;
+
+      @media (max-width: $tablet) {
+        font-size: 1.4rem;
+      }
     }
 
     &__button {
-      button {
+      @media (max-width: $mobile) {
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+      button {
+        display: flex;
+        align-items: center;
         gap: 10px;
         padding: 10px 20px;
         background: transparent;
@@ -146,6 +174,12 @@ export default {
           background: $secondary;
           color: #fff;
           transition: 0.4s;
+        }
+
+        @media (max-width: $tablet) {
+          padding: 5px 10px;
+          margin-bottom: 20px;
+          font-size: 1.4rem;
         }
       }
     }

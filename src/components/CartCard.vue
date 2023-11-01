@@ -62,12 +62,20 @@ export default {
       font-size: 0.9rem;
       font-weight: 700;
       margin-bottom: 6px;
+
+      @media (max-width: $tablet) {
+        font-size: 0.8rem;
+      }
     }
 
     h1 {
       font-weight: 400;
       font-size: 1.3rem;
       color: $primary;
+
+      @media (max-width: $tablet) {
+        font-size: 1rem;
+      }
     }
   }
 
@@ -76,6 +84,10 @@ export default {
     color: $brown-100;
     font-size: 1.3rem;
     margin-inline: auto;
+
+    @media (max-width: $tablet) {
+      font-size: 1rem;
+    }
   }
 
   &__trash {

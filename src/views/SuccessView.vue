@@ -34,6 +34,10 @@ export default {
   align-items: center;
   padding: 80px 0 180px;
 
+  @media (max-width: $tablet) {
+    padding: 51px 16px 220px;
+  }
+
   &__container {
     width: 100%;
     display: flex;
@@ -49,6 +53,10 @@ export default {
       margin: 15px 0;
       font-size: 2rem;
       color: $green;
+
+      @media (max-width: $tablet) {
+        font-size: 1.4rem;
+      }
     }
 
     p {
@@ -57,6 +65,10 @@ export default {
       color: $brown-100;
       max-width: 800px;
       margin-bottom: 30px;
+
+      @media (max-width: $tablet) {
+        font-size: 1.1rem;
+      }
     }
 
     button {
@@ -68,6 +80,10 @@ export default {
       border-radius: 8px;
       cursor: pointer;
       font-weight: 400;
+
+      @media (max-width: $tablet) {
+        font-size: 1rem;
+      }
 
       &:hover {
         filter: opacity(0.9);

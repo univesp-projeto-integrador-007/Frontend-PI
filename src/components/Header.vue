@@ -26,6 +26,26 @@
         </div>
       </li>
     </ul>
+    <div
+      :class="{ active: burgerVisibility }"
+      class="header__hamburger"
+      @click="changeVisibility"
+    >
+      <span class="header__hamburger__item" />
+      <span class="header__hamburger__item" />
+      <span class="header__hamburger__item" />
+    </div>
+    <nav :class="{ active: burgerVisibility }" class="header__nav">
+      <ul @click="burgerVisibility = false">
+        <li><router-link to="/quem-somos">Sobre nós</router-link></li>
+        <li>
+          <router-link to="/carrinho">
+            Carrinho ({{ numberOfItems }})</router-link
+          >
+        </li>
+        <li @click="handleToLogin">login</li>
+      </ul>
+    </nav>
   </div>
 </template>
 
@@ -35,6 +55,7 @@ export default {
   data() {
     return {
       numberOfItems: 0,
+      burgerVisibility: false,
     };
   },
 
@@ -56,6 +77,9 @@ export default {
       }
       return this.$router.push("/login");
     },
+    changeVisibility() {
+      this.burgerVisibility = !this.burgerVisibility;
+    },
   },
 };
 </script>
@@ -71,10 +95,14 @@ export default {
   justify-content: space-between;
   color: $secondary;
 
+  @media (max-width: $tablet) {
+    justify-content: space-around;
+  }
+
   &__return {
     padding-left: 100px;
     width: 200px;
-    @media (max-width: $mobile) {
+    @media (max-width: $tablet) {
       display: none;
     }
   }
@@ -93,6 +121,10 @@ export default {
     align-items: center;
     gap: 32px;
     padding-right: 100px;
+
+    @media (max-width: $tablet) {
+      display: none;
+    }
 
     li {
       font-size: 1.2rem;
@@ -132,6 +164,103 @@ export default {
       color: #fff;
       border-radius: 50%;
       font-size: 14px;
+    }
+  }
+
+  &__hamburger {
+    display: inline-block;
+    box-sizing: border-box;
+    transition: all 0.3s;
+    z-index: 20;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    border: 2px solid $primary;
+    cursor: pointer;
+
+    @media (min-width: $tablet) {
+      display: none;
+    }
+
+    &__item {
+      display: inline-block;
+      box-sizing: border-box;
+      transition: all 0.3s;
+      position: absolute;
+      width: 30px;
+      height: 4px;
+      background-color: $primary;
+      border-radius: 5px;
+
+      &:nth-of-type(1) {
+        top: 8px;
+      }
+      &:nth-of-type(2) {
+        top: 16px;
+      }
+      &:nth-of-type(3) {
+        bottom: 8px;
+      }
+    }
+    &.active {
+      border: none;
+      position: fixed;
+    }
+    &.active .header__hamburger__item:nth-of-type(1) {
+      -moz-transform: translateY(10px) rotate(-45deg);
+      -webkit-transform: translateY(10px) rotate(-45deg);
+      transform: translateY(10px) rotate(-45deg);
+      background-color: #fff;
+    }
+    &.active .header__hamburger__item:nth-of-type(2) {
+      transition-duration: 0s;
+      opacity: 0;
+    }
+    &.active .header__hamburger__item:nth-of-type(3) {
+      -moz-transform: translateY(-10px) rotate(45deg);
+      -webkit-transform: translateY(-10px) rotate(45deg);
+      transform: translateY(-10px) rotate(45deg);
+      background-color: #fff;
+    }
+  }
+
+  &__nav {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: $primary;
+    z-index: 2;
+    padding: 50px;
+    color: white;
+    display: none;
+
+    ul {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      li {
+        text-align: left;
+        width: 100%;
+        font-size: 28px;
+        margin-bottom: 18px;
+
+        a {
+          color: white;
+        }
+      }
+    }
+
+    &.active {
+      display: block;
     }
   }
 }

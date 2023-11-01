@@ -23,6 +23,7 @@ export default {
   text-align: center;
   position: relative;
   min-height: 100vh;
+  scroll-behavior: smooth;
 }
 
 .content-wrap {
