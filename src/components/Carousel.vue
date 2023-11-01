@@ -30,6 +30,10 @@ export default {
 .carousel {
   width: 100%;
   height: 400px;
+
+  @media (max-width: $tablet) {
+    display: none;
+  }
 }
 
 .parent {

@@ -43,6 +43,10 @@
     background: $yellow-150;
     height: 2px;
     margin: 16px 0 95px;
+
+    @media (max-width: $tablet) {
+      margin: 16px 0 32px;
+    }
   }
 
   &__container {
@@ -58,10 +62,18 @@
     padding: 20px 43px 100px;
     max-width: 1060px;
 
+    @media (max-width: $tablet) {
+      padding: 40px 20px;
+    }
+
     h1 {
       font-size: 2rem;
       font-weight: 600;
       color: $primary;
+
+      @media (max-width: $tablet) {
+        font-size: 1.5rem;
+      }
     }
 
     p {
@@ -69,6 +81,10 @@
       font-weight: 400;
       color: $secondary;
       margin-bottom: 20px;
+
+      @media (max-width: $tablet) {
+        font-size: 1rem;
+      }
     }
   }
 }

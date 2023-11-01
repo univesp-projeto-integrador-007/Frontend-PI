@@ -117,6 +117,10 @@ export default {
   height: 100%;
   padding-bottom: 180px;
 
+  @media (max-width: $tablet) {
+    padding-inline: 10px;
+  }
+
   &__container {
     width: 100%;
     display: flex;
@@ -125,12 +129,16 @@ export default {
 
     &__emphasis {
       margin: 40px 0 26px;
-      width: 350px;
+      max-width: 350px;
 
       h1 {
         font-size: 32px;
         font-weight: 600;
         color: $primary;
+
+        @media (max-width: $tablet) {
+          font-size: 28px;
+        }
       }
       p {
         font-size: 16px;
@@ -138,6 +146,10 @@ export default {
         color: $brown-100;
         font-family: "Cairo", sans-serif;
         line-height: 20px;
+
+        @media (max-width: $tablet) {
+          font-size: 14px;
+        }
       }
     }
 
@@ -173,13 +185,19 @@ export default {
       &::placeholder {
         color: $brown-200;
         font-size: 20px;
+
+        @media (max-width: $tablet) {
+          font-size: 14px;
+        }
       }
     }
 
     &__chips {
       display: flex;
+      justify-content: center;
       gap: 10px;
       margin-bottom: 36px;
+      flex-wrap: wrap;
     }
   }
 }

@@ -14,13 +14,14 @@
       <span>Tipo</span>
       <span>Valor</span>
       <button @click="handleModal(true)">
-        <img src="@/assets/plus-circle.svg" alt="" /> Adicionar produto
+        <img src="@/assets/plus-circle.svg" alt="" />
+        <span> Adicionar produto </span>
       </button>
     </div>
     <div v-for="product in products" :key="product._id" class="products__table">
       <div class="products__item">
         <span>{{ product.name }}</span>
-        <span>{{ product._id }}</span>
+        <span class="products__item__id">{{ product._id }}</span>
         <span>{{ product.type }}</span>
         <span>{{ maskedMoney(product.price) }}</span>
         <span
@@ -170,6 +171,10 @@ export default {
     color: $primary;
     font-weight: 700;
     padding: 10px;
+    align-items: center;
+    @media (max-width: $tablet) {
+      grid-template-columns: repeat(4, 1fr) 30px;
+    }
 
     button {
       display: flex;
@@ -183,6 +188,12 @@ export default {
       border-radius: 3px;
       cursor: pointer;
       font-weight: 600;
+
+      span {
+        @media (max-width: 980px) {
+          display: none;
+        }
+      }
 
       &:active {
         filter: brightness(0.7);
@@ -205,10 +216,19 @@ export default {
     border: 1px solid $secondary;
     padding: 5px;
 
+    @media (max-width: $tablet) {
+      grid-template-columns: repeat(4, 1fr) 30px;
+      font-size: 14px;
+    }
+
     img {
       width: 25px;
       margin-right: 30px;
       cursor: pointer;
+    }
+
+    &__id {
+      word-break: break-all;
     }
   }
 }

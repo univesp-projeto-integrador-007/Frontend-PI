@@ -163,6 +163,9 @@ export default {
 
 .cart {
   padding: 50px 150px 180px;
+  @media (max-width: $tablet) {
+    padding: 50px 10px 200px;
+  }
 
   &__title {
     display: flex;
@@ -171,6 +174,10 @@ export default {
     font-weight: 600;
     height: 60px;
     border-bottom: 1px solid $yellow-100;
+
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
 
     h1 {
       font-size: 2rem;
@@ -185,6 +192,7 @@ export default {
   &__container {
     display: flex;
     gap: 50px;
+
     @media (max-width: $tablet) {
       flex-direction: column;
     }
@@ -203,6 +211,10 @@ export default {
       font-size: 1.7rem;
       text-align: right;
       width: 100%;
+
+      @media (max-width: $tablet) {
+        margin: 36px 16px 0 0;
+      }
     }
     span {
       font-weight: 600;
@@ -217,9 +229,12 @@ export default {
     padding: 50px 20px;
     border-radius: 8px;
 
+    @media (max-width: $tablet) {
+      margin-left: 0;
+    }
+
     h1 {
       color: $primary;
-
       font-weight: 600;
       font-size: 1.7rem;
     }
@@ -248,12 +263,20 @@ export default {
         font-size: 20px;
         color: $brown-200;
 
+        @media (max-width: $tablet) {
+          font-size: 1rem;
+        }
+
         &:focus {
           outline: none;
         }
         &::placeholder {
           color: $brown-200;
           font-size: 20px;
+
+          @media (max-width: $tablet) {
+            font-size: 1rem;
+          }
         }
       }
     }
@@ -322,6 +345,10 @@ export default {
   h1 {
     font-size: 2.5rem;
     color: $primary;
+
+    @media (max-width: $tablet) {
+      font-size: 1.5rem;
+    }
   }
 }
 </style>
