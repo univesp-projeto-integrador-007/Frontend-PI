@@ -1,7 +1,12 @@
 <template>
   <div id="app">
-    <Header />
-    <router-view class="content-wrap" />
+    <Header
+      :isLogged="isLogged"
+      @searchTypeUser="searchTypeUser"
+      @handleToLogin="handleToLogin"
+      @handleLogout="handleLogout"
+    />
+    <router-view class="content-wrap" @searchTypeUser="searchTypeUser" />
     <Footer />
   </div>
 </template>
@@ -11,6 +16,37 @@ import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 export default {
   components: { Header, Footer },
+  data() {
+    return {
+      isLogged: false,
+    };
+  },
+
+  created() {
+    this.searchTypeUser();
+  },
+  methods: {
+    searchTypeUser() {
+      const tokenArmazenado = localStorage.getItem("token");
+
+      if (tokenArmazenado) {
+        this.isLogged = true;
+        return;
+      }
+
+      this.isLogged = false;
+    },
+    handleToLogin() {
+      if (this.isLogged) {
+        return this.$router.push("/admin");
+      }
+      return this.$router.push("/login");
+    },
+    handleLogout() {
+      localStorage.removeItem("token");
+      this.searchTypeUser();
+    },
+  },
 };
 </script>
 
