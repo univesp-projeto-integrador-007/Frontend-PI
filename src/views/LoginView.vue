@@ -48,6 +48,7 @@ export default {
         const token = res.data.token;
         localStorage.setItem("token", token);
         this.$router.push("/");
+        this.$emit("searchTypeUser");
       } catch (err) {
         console.log(err.response.data.msg);
       }

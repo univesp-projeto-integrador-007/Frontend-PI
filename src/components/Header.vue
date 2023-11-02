@@ -43,7 +43,8 @@
             Carrinho ({{ numberOfItems }})</router-link
           >
         </li>
-        <li @click="handleToLogin">login</li>
+        <li @click="handleToLogin">{{ isLogged ? "Admin" : "Login" }}</li>
+        <li v-if="isLogged" @click="handleLogout">Desconectar</li>
       </ul>
     </nav>
   </div>
@@ -58,6 +59,12 @@ export default {
       burgerVisibility: false,
     };
   },
+  props: {
+    isLogged: {
+      type: "boolean",
+      default: false,
+    },
+  },
 
   computed: {
     myProp() {
@@ -70,12 +77,14 @@ export default {
     },
   },
   methods: {
+    searchTypeUser() {
+      this.$emit("searchTypeUser");
+    },
     handleToLogin() {
-      const tokenArmazenado = localStorage.getItem("token");
-      if (tokenArmazenado) {
-        return this.$router.push("/admin");
-      }
-      return this.$router.push("/login");
+      this.$emit("handleToLogin");
+    },
+    handleLogout() {
+      this.$emit("handleLogout");
     },
     changeVisibility() {
       this.burgerVisibility = !this.burgerVisibility;
@@ -208,7 +217,6 @@ export default {
     }
     &.active {
       border: none;
-      position: fixed;
     }
     &.active .header__hamburger__item:nth-of-type(1) {
       -moz-transform: translateY(10px) rotate(-45deg);
