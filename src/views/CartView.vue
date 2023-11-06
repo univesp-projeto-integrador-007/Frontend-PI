@@ -163,7 +163,8 @@ export default {
 
 .cart {
   padding: 50px 150px 180px;
-  @media (max-width: $tablet) {
+
+  @media (max-width: 720px) {
     padding: 50px 10px 200px;
   }
 
