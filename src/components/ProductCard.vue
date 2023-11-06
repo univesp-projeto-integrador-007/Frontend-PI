@@ -35,7 +35,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 195px;
-  height: 190px;
+  height: 211px;
   background: transparent;
   border-radius: 10px;
   border: 2px solid $yellow-100;

@@ -65,6 +65,9 @@ export default {
   @media (max-width: $tablet) {
     flex-direction: column;
     gap: 25px;
+  }
+
+  @media (max-width: 720px) {
     padding: 50px 25px 200px;
   }
 
