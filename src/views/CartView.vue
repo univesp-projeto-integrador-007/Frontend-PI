@@ -66,8 +66,8 @@
 import CartCard from "@/components/CartCard.vue";
 import Button from "@/components/Button.vue";
 import ConvertMoney from "@/helpers/convert-money";
-import Calendar from "v-calendar/lib/components/calendar.umd";
-import DatePicker from "v-calendar/lib/components/date-picker.umd";
+import Calendar from "v-calendar";
+import DatePicker from "v-calendar";
 import axios from "axios";
 
 export default {
