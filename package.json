@@ -12,6 +12,7 @@
     "core-js": "^3.8.3",
     "v-calendar": "^2.4.2",
     "vue": "^2.6.16",
+    "vue-analytics": "^5.22.1",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2"
   },
@@ -23,7 +24,6 @@
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
     "serve": "^14.2.0",
-    "vue-gtag": "^2.0.1",
     "vue-svg-loader": "^0.10.0",
     "vue-template-compiler": "^2.6.14"
   }
