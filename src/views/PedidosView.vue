@@ -9,52 +9,52 @@
 </template>
 
 <script>
-import axios from "axios";
-import OrderCard from "@/components/OrderCard.vue";
+import OrderCard from '@/components/OrderCard.vue'
+import axios from 'axios'
 
 export default {
-  name: "PedidosView",
+  name: 'PedidosView',
   components: { OrderCard },
   data() {
     return {
-      orders: [],
-    };
+      orders: []
+    }
   },
 
   async mounted() {
     try {
-      const tokenArmazenado = localStorage.getItem("token");
+      const tokenArmazenado = localStorage.getItem('token')
       if (!tokenArmazenado) {
-        return this.$router.push("/");
+        return this.$router.push('/')
       }
-      const res = await axios.get(`${process.env.VUE_APP_BACKEND}api/orders`, {
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND}api/orders`, {
         headers: {
-          Authorization: `Bearer ${tokenArmazenado}`,
-        },
-      });
-      this.orders = res.data;
+          Authorization: `Bearer ${tokenArmazenado}`
+        }
+      })
+      this.orders = res.data
     } catch (err) {
-      console.log(err.response.data.msg);
+      console.log(err.response.data.msg)
     }
   },
 
   methods: {
     HandleProduct(value) {
-      this.$store.commit("storeCurrentProduct", value);
-      this.$router.push("/produtos");
+      this.$store.commit('storeCurrentProduct', value)
+      this.$router.push('/produtos')
     },
     handleFilter(value) {
-      this.filter = value;
+      this.filter = value
     },
     itensUnicos(arr) {
-      return arr.filter((v, i, a) => a.indexOf(v) === i);
-    },
-  },
-};
+      return arr.filter((v, i, a) => a.indexOf(v) === i)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-@import "@/scss/main.scss";
+@import '@/scss/main.scss';
 
 .orders {
   display: flex;

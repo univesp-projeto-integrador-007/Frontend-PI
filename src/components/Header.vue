@@ -12,12 +12,10 @@
     <ul class="header__options">
       <li><router-link to="/quem-somos">Sobre nós</router-link></li>
       <li class="header__cart">
-        <div v-if="numberOfItems" class="header__cart__circle">
-          {{ numberOfItems }}
+        <div v-if="cart.length" class="header__cart__circle">
+          {{ cart.length }}
         </div>
-        <router-link to="/carrinho"
-          ><img src="@/assets/cart.svg" alt="carrinho"
-        /></router-link>
+        <router-link to="/carrinho"><img src="@/assets/cart.svg" alt="carrinho" /></router-link>
       </li>
 
       <li class="header__options__login" @click="handleToLogin">
@@ -26,11 +24,7 @@
         </div>
       </li>
     </ul>
-    <div
-      :class="{ active: burgerVisibility }"
-      class="header__hamburger"
-      @click="changeVisibility"
-    >
+    <div :class="{ active: burgerVisibility }" class="header__hamburger" @click="changeVisibility">
       <span class="header__hamburger__item" />
       <span class="header__hamburger__item" />
       <span class="header__hamburger__item" />
@@ -39,11 +33,9 @@
       <ul @click="burgerVisibility = false">
         <li><router-link to="/quem-somos">Sobre nós</router-link></li>
         <li>
-          <router-link to="/carrinho">
-            Carrinho ({{ numberOfItems }})</router-link
-          >
+          <router-link to="/carrinho"> Carrinho ({{ numberOfItems }})</router-link>
         </li>
-        <li @click="handleToLogin">{{ isLogged ? "Admin" : "Login" }}</li>
+        <li @click="handleToLogin">{{ isLogged ? 'Admin' : 'Login' }}</li>
         <li v-if="isLogged" @click="handleLogout">Desconectar</li>
       </ul>
     </nav>
@@ -52,49 +44,45 @@
 
 <script>
 export default {
-  name: "Header",
+  name: 'HeaderComponent',
   data() {
     return {
       numberOfItems: 0,
-      burgerVisibility: false,
-    };
+      burgerVisibility: false
+    }
   },
   props: {
     isLogged: {
-      type: "boolean",
-      default: false,
-    },
+      default: false
+    }
   },
 
   computed: {
-    myProp() {
-      return this.$store.state.cart;
-    },
+    cart() {
+      console.log(this.$store.state.cart)
+      return this.$store.state.cart
+    }
   },
-  watch: {
-    myProp(newValue) {
-      this.numberOfItems = newValue.length;
-    },
-  },
+
   methods: {
     searchTypeUser() {
-      this.$emit("searchTypeUser");
+      this.$emit('searchTypeUser')
     },
     handleToLogin() {
-      this.$emit("handleToLogin");
+      this.$emit('handleToLogin')
     },
     handleLogout() {
-      this.$emit("handleLogout");
+      this.$emit('handleLogout')
     },
     changeVisibility() {
-      this.burgerVisibility = !this.burgerVisibility;
-    },
-  },
-};
+      this.burgerVisibility = !this.burgerVisibility
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-@import "@/scss/main.scss";
+@import '@/scss/main.scss';
 
 .header {
   display: flex;

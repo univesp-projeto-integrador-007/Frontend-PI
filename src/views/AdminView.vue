@@ -13,17 +13,12 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "admin",
-  data() {
-    return {
-      email: "",
-      password: "",
-    };
-  },
-  methods: {},
-};
+<script setup>
+import { ref } from "vue";
+import { RouterLink } from "vue-router";
+
+const email = ref("");
+const password = ref("");
 </script>
 
 

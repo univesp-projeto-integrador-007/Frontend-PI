@@ -7,11 +7,7 @@
       </div>
       <div class="cart__container">
         <div class="cart__container-left">
-          <div
-            class="cart__container-left__table"
-            v-for="product in cart"
-            :key="product.id"
-          >
+          <div class="cart__container-left__table" v-for="product in cart" :key="product.id">
             <CartCard :product="product" @handleRemove="handleRemove" />
           </div>
           <h1>
@@ -23,25 +19,18 @@
           <div class="cart__container-right__wrapper" />
           <div class="cart__container-right__userData">
             <input v-model="name" type="text" placeholder="Insira seu nome" />
-            <input
-              v-model="phoneNumber"
-              type="tel"
-              placeholder="Insira seu telefone"
-            />
+            <input v-model="phoneNumber" type="tel" placeholder="Insira seu telefone" />
           </div>
           <div class="cart__container-right__date">
-            <button
-              class="cart__container-right__date__button"
-              @click="handleDate"
-            >
+            <button class="cart__container-right__date__button" @click="handleDate">
               {{ buttonText }}
             </button>
             <DatePicker
-              v-model="selectedDate"
-              :min-date="new Date()"
-              :disabled-dates="{ weekdays: [2, 0] }"
-              @click="handleDate"
               v-if="isShow"
+              v-model="selectedDate"
+              is-required
+              :min-date="new Date()"
+              @click="handleDate"
             />
 
             <!-- <div class="cart__container-right__wrapper" /> -->
@@ -63,103 +52,98 @@
 </template>
 
 <script>
-import CartCard from "@/components/CartCard.vue";
-import Button from "@/components/Button.vue";
-import ConvertMoney from "@/helpers/convert-money";
-import Calendar from "v-calendar";
-import DatePicker from "v-calendar";
-import axios from "axios";
+import CartCard from '@/components/CartCard.vue'
+import ConvertMoney from '@/helpers/convert-money'
+import axios from 'axios'
+import { DatePicker } from 'v-calendar'
+import 'v-calendar/style.css'
 
 export default {
-  components: { CartCard, Button, Calendar, DatePicker },
-  name: "CartView",
+  components: { CartCard, DatePicker },
+  name: 'CartView',
   data() {
     return {
       cart: {},
       numberItems: 0,
       isShow: false,
-      selectedDate: "",
-      name: "",
-      phoneNumber: "",
-    };
+      selectedDate: null,
+      name: '',
+      phoneNumber: ''
+    }
   },
   watch: {
     selectedDate(newVal) {
-      this.selectedDate = newVal;
-      this.isShow = false;
-    },
+      this.selectedDate = newVal
+      this.isShow = false
+    }
   },
   computed: {
     addedValues() {
       if (this.cart.length) {
-        let soma = 0;
+        let soma = 0
         for (var i = 0; i < this.cart.length; i++) {
-          soma += this.cart[i].price;
+          soma += this.cart[i].price
         }
-        return soma;
+        return soma
       }
+      return 0
     },
     buttonText() {
       if (this.selectedDate) {
         var data = this.selectedDate,
-          dia = data.getDate().toString().padStart(2, "0"),
-          mes = (data.getMonth() + 1).toString().padStart(2, "0"), //+1 pois no getMonth Janeiro começa com zero.
-          ano = data.getFullYear();
-        return dia + "/" + mes + "/" + ano;
+          dia = data.getDate().toString().padStart(2, '0'),
+          mes = (data.getMonth() + 1).toString().padStart(2, '0'), //+1 pois no getMonth Janeiro começa com zero.
+          ano = data.getFullYear()
+        return dia + '/' + mes + '/' + ano
       }
-      return "Selecione uma data";
-    },
+      return 'Selecione uma data'
+    }
   },
   created() {
-    this.cart = this.$store.state.cart;
-    this.numberItems = this.cart.length;
+    this.cart = this.$store.state.cart
+    this.numberItems = this.cart.length
   },
   methods: {
     handleRemove(value) {
-      this.$store.commit("storeRemoveCart", value);
-      this.cart = this.$store.state.cart;
-      this.numberItems = this.cart.length;
+      this.$store.commit('storeRemoveCart', value)
+      this.cart = this.$store.state.cart
+      this.numberItems = this.cart.length
     },
     maskedMoney(value) {
-      return ConvertMoney(value);
+      return ConvertMoney(value)
     },
     handleDate() {
-      this.isShow = !this.isShow;
+      this.isShow = !this.isShow
     },
     async handleForm() {
       try {
-        if (
-          this.cart &&
-          this.addedValues &&
-          this.selectedDate &&
-          this.name &&
-          this.phoneNumber
-        ) {
+        if (this.cart && this.addedValues && this.selectedDate && this.name && this.phoneNumber) {
           const payload = {
             products: this.cart,
             value: this.addedValues,
             date: this.buttonText,
             name: this.name,
-            phoneNumber: this.phoneNumber,
-          };
+            phoneNumber: this.phoneNumber
+          }
 
-          const res = await axios.post(
-            `${process.env.VUE_APP_BACKEND}api/orders`,
-            payload
-          );
-          this.$router.push("/sucesso");
-          this.$store.commit("storeCleanCart");
+          const res = await axios.post(`${import.meta.env.VITE_BACKEND}api/orders`, payload)
+          this.$router.push('/sucesso')
+          this.$store.commit('storeCleanCart')
+
+          if (!res) {
+            throw new Error(res)
+          }
         }
       } catch (err) {
-        console.log(err);
+        console.log(err)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-@import "@/scss/main.scss";
+@import '@/scss/main.scss';
 
 .cart {
   padding: 50px 150px 180px;
