@@ -11,10 +11,7 @@
           </a>
         </div>
         <div class="footer__container__items__item">
-          <a
-            target="blank"
-            href="https://instagram.com/d.brigadeiros?igshid=MzRlODBiNWFlZA=="
-          >
+          <a target="blank" href="https://instagram.com/d.brigadeiros?igshid=MzRlODBiNWFlZA==">
             <img src="@/assets/icon-instagram.svg" />
           </a>
         </div>
@@ -26,13 +23,13 @@
 
 <script>
 export default {
-  name: "Footer",
-  components: {},
-};
+  name: 'FooterComponent',
+  components: {}
+}
 </script>
 
 <style lang="scss" scoped>
-@import "@/scss/main.scss";
+@import '@/scss/main.scss';
 
 .footer {
   background: $primary;

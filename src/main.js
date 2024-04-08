@@ -1,17 +1,17 @@
-import Vue from 'vue'
-import VueAnalytics from 'vue-analytics'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import { setupCalendar } from 'v-calendar';
+import VueGtag from "vue-gtag";
 
-Vue.config.productionTip = false
 
-Vue.use(VueAnalytics, {
-  id: '288701657'
-})
+// Vue.use(VueAnalytics, {
+//   id: '288701657'
+// })
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+createApp(App).use(router).use(setupCalendar, {}).use(VueGtag, {
+  config: { id: '288701657' },
+}, router).use(store).mount('#app')
+
+

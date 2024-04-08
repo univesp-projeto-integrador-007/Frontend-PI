@@ -23,43 +23,40 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
-  name: "login",
+  name: 'login',
   data() {
     return {
-      email: "",
-      password: "",
-    };
+      email: '',
+      password: ''
+    }
   },
   methods: {
     async loginSubmit(e) {
-      e.preventDefault();
+      e.preventDefault()
       const payload = {
         email: this.email,
-        password: this.password,
-      };
-      try {
-        const res = await axios.post(
-          `${process.env.VUE_APP_BACKEND}api/auth/login`,
-          payload
-        );
-        const token = res.data.token;
-        localStorage.setItem("token", token);
-        this.$router.push("/");
-        this.$emit("searchTypeUser");
-      } catch (err) {
-        console.log(err.response.data.msg);
+        password: this.password
       }
-    },
-  },
-};
+      try {
+        const res = await axios.post(`${import.meta.env.VITE_BACKEND}api/auth/login`, payload)
+        const token = res.data.token
+        localStorage.setItem('token', token)
+        this.$router.push('/')
+        this.$emit('searchTypeUser')
+      } catch (err) {
+        console.log(err.response.data.msg)
+      }
+    }
+  }
+}
 </script>
 
 
 <style lang="scss" scoped>
-@import "@/scss/main.scss";
+@import '@/scss/main.scss';
 .login {
   width: 100%;
   height: 100%;

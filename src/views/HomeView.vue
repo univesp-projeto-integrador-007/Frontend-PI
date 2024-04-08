@@ -5,16 +5,11 @@
       <div class="home__container__emphasis">
         <h1>Doces em destaque</h1>
         <p>
-          Produtos destacados por sua popularidade, além de suas deliciosidades
-          e gosturas doces
+          Produtos destacados por sua popularidade, além de suas deliciosidades e gosturas doces
         </p>
       </div>
       <div class="home__container__items">
-        <div
-          v-for="product in emphasis"
-          :key="product._id"
-          @click="HandleProduct(product)"
-        >
+        <div v-for="product in emphasis" :key="product._id" @click="HandleProduct(product)">
           <product-card :product="product" />
         </div>
       </div>
@@ -30,16 +25,12 @@
         v-model="filter"
       />
       <div class="home__container__chips">
-        <div v-for="type in types" :key="type._id" @click="handleFilter(type)">
-          <Chip :text="type" />
+        <div v-for="item in types" :key="item._id" @click="handleFilter(item)">
+          <Chip :text="item" />
         </div>
       </div>
       <div id="cardapio" class="home__container__items">
-        <div
-          v-for="product in filteredProducts"
-          :key="product._id"
-          @click="HandleProduct(product)"
-        >
+        <div v-for="product in filteredProducts" :key="product._id" @click="HandleProduct(product)">
           <product-card :product="product" />
         </div>
       </div>
@@ -48,49 +39,49 @@
 </template>
 
 <script>
-import Carousel from "@/components/Carousel.vue";
-import ProductCard from "@/components/ProductCard.vue";
-import Chip from "@/components/Chip.vue";
-import axios from "axios";
+import Carousel from '@/components/Carousel.vue'
+import Chip from '@/components/Chip.vue'
+import ProductCard from '@/components/ProductCard.vue'
+import axios from 'axios'
 
 export default {
-  name: "HomeView",
+  name: 'HomeView',
   components: { Carousel, ProductCard, Chip },
   data() {
     return {
-      filter: "",
+      filter: '',
       products: [],
       types: [],
-      emphasis: [],
-    };
+      emphasis: []
+    }
   },
 
   async mounted() {
-    const types = [];
+    const types = []
     try {
-      const res = await axios.get(`${process.env.VUE_APP_BACKEND}api/products`);
-      this.products = res.data;
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND}api/products`)
+      this.products = res.data
     } catch (err) {
-      console.log(err.response.data.msg);
+      console.log(err.response.data.msg)
     }
     this.products.forEach((el) => {
-      return types.push(el.type);
-    });
-    this.emphasis = this.products.filter((el) => el.isEmphasis);
-    this.types = this.itensUnicos(types);
+      return types.push(el.type)
+    })
+    this.emphasis = this.products.filter((el) => el.isEmphasis)
+    this.types = this.itensUnicos(types)
   },
 
   methods: {
     HandleProduct(value) {
-      this.$store.commit("storeCurrentProduct", value);
-      this.$router.push("/produtos");
+      this.$store.commit('storeCurrentProduct', value)
+      this.$router.push('/produtos')
     },
     handleFilter(value) {
-      this.filter = value;
+      this.filter = value
     },
     itensUnicos(arr) {
-      return arr.filter((v, i, a) => a.indexOf(v) === i);
-    },
+      return arr.filter((v, i, a) => a.indexOf(v) === i)
+    }
   },
   computed: {
     filteredProducts() {
@@ -99,18 +90,18 @@ export default {
           return (
             product.name.toLowerCase().includes(this.filter.toLowerCase()) ||
             product.type.toLowerCase().includes(this.filter.toLowerCase())
-          );
-        });
-        return products;
+          )
+        })
+        return products
       }
-      return this.products;
-    },
-  },
-};
+      return this.products
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-@import "@/scss/main.scss";
+@import '@/scss/main.scss';
 
 .home {
   width: 100%;
@@ -144,7 +135,7 @@ export default {
         font-size: 16px;
         font-weight: 300;
         color: $brown-100;
-        font-family: "Cairo", sans-serif;
+        font-family: 'Cairo', sans-serif;
         line-height: 20px;
 
         @media (max-width: $tablet) {

@@ -12,46 +12,44 @@
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
-import Footer from "@/components/Footer.vue";
+import Footer from '@/components/Footer.vue'
+import Header from '@/components/Header.vue'
+import { onMounted, ref } from 'vue'
+import router from './router'
+
 export default {
   components: { Header, Footer },
-  data() {
-    return {
-      isLogged: false,
-    };
-  },
+  setup() {
+    const isLogged = ref(false)
 
-  created() {
-    this.searchTypeUser();
-  },
-  methods: {
-    searchTypeUser() {
-      const tokenArmazenado = localStorage.getItem("token");
+    const searchTypeUser = () => {
+      const tokenArmazenado = localStorage.getItem('token')
+      isLogged.value = !!tokenArmazenado
+    }
 
-      if (tokenArmazenado) {
-        this.isLogged = true;
-        return;
+    const handleToLogin = () => {
+      if (isLogged.value) {
+        return router.push('/admin')
       }
+      return router.push('/login')
+    }
 
-      this.isLogged = false;
-    },
-    handleToLogin() {
-      if (this.isLogged) {
-        return this.$router.push("/admin");
-      }
-      return this.$router.push("/login");
-    },
-    handleLogout() {
-      localStorage.removeItem("token");
-      this.searchTypeUser();
-    },
-  },
-};
+    const handleLogout = () => {
+      localStorage.removeItem('token')
+      searchTypeUser()
+    }
+
+    onMounted(() => {
+      searchTypeUser()
+    })
+
+    return { isLogged, searchTypeUser, handleToLogin, handleLogout }
+  }
+}
 </script>
 
 <style lang="scss">
-@import "@/scss/main.scss";
+@import '@/scss/main.scss';
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

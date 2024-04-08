@@ -25,14 +25,8 @@
         <span>{{ product.type }}</span>
         <span>{{ maskedMoney(product.price) }}</span>
         <span
-          ><img
-            src="@/assets/edit.svg"
-            alt="Editar"
-            @click="handleEditProduct(product)" />
-          <img
-            src="@/assets/trash.svg"
-            alt="Excluir"
-            @click="handleRemove(product._id)"
+          ><img src="@/assets/edit.svg" alt="Editar" @click="handleEditProduct(product)" />
+          <img src="@/assets/trash.svg" alt="Excluir" @click="handleRemove(product._id)"
         /></span>
       </div>
     </div>
@@ -40,114 +34,101 @@
 </template>
 
 <script>
-import axios from "axios";
-import ModalProduct from "@/components/ModalProduct.vue";
-import ConvertMoney from "@/helpers/convert-money";
+import ModalProduct from '@/components/ModalProduct.vue'
+import ConvertMoney from '@/helpers/convert-money'
+import axios from 'axios'
 
 export default {
-  name: "ManagerProductsView",
+  name: 'ManagerProductsView',
   components: { ModalProduct },
   data() {
     return {
       products: [],
-      token: "",
+      token: '',
       modal: {
         isShow: false,
-        valueDefault: "",
-      },
-    };
+        valueDefault: ''
+      }
+    }
   },
 
   async mounted() {
-    this.token = localStorage.getItem("token");
+    this.token = localStorage.getItem('token')
     if (!this.token) {
-      return this.$router.push("/");
+      return this.$router.push('/')
     }
-    this.getInfos();
+    this.getInfos()
   },
 
   methods: {
     async getInfos() {
       try {
-        const res = await axios.get(
-          `${process.env.VUE_APP_BACKEND}api/products`
-        );
-        this.products = res.data;
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND}api/products`)
+        this.products = res.data
       } catch (err) {
-        console.log(err.response.data.msg);
+        console.log(err.response.data.msg)
       }
     },
     maskedMoney(value) {
-      return ConvertMoney(value);
+      return ConvertMoney(value)
     },
     async handleRemove(value) {
       try {
-        await axios.delete(
-          `${process.env.VUE_APP_BACKEND}api/products/${value}`,
-          {
-            headers: {
-              Authorization: `Bearer ${this.token}`,
-            },
+        await axios.delete(`${import.meta.env.VITE_BACKEND}api/products/${value}`, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
           }
-        );
+        })
 
-        this.getInfos();
+        this.getInfos()
       } catch (err) {
-        console.log(err.response.data.msg);
+        console.log(err.response.data.msg)
       }
     },
     handleEditProduct(value) {
-      this.modal.valueDefault = value;
-      this.handleModal(true);
+      this.modal.valueDefault = value
+      this.handleModal(true)
     },
     handleModal(value) {
       if (!value) {
-        this.modal.valueDefault = "";
+        this.modal.valueDefault = ''
       }
-      this.modal.isShow = value;
+      this.modal.isShow = value
     },
     async AddProduct(payload) {
       try {
-        await axios.post(
-          `${process.env.VUE_APP_BACKEND}api/products/`,
-          payload,
-          {
-            headers: {
-              Authorization: `Bearer ${this.token}`,
-            },
+        await axios.post(`${import.meta.env.VITE_BACKEND}api/products/`, payload, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
           }
-        );
+        })
 
-        this.getInfos();
-        this.handleModal(false);
+        this.getInfos()
+        this.handleModal(false)
       } catch (err) {
-        console.log(err);
+        console.log(err)
       }
     },
     async EditProduct(payload) {
       try {
-        await axios.put(
-          `${process.env.VUE_APP_BACKEND}api/products/${payload.id}`,
-          payload,
-          {
-            headers: {
-              Authorization: `Bearer ${this.token}`,
-            },
+        await axios.put(`${import.meta.env.VITE_BACKEND}api/products/${payload.id}`, payload, {
+          headers: {
+            Authorization: `Bearer ${this.token}`
           }
-        );
+        })
 
-        this.getInfos();
-        this.handleModal(false);
+        this.getInfos()
+        this.handleModal(false)
       } catch (err) {
-        console.log(err);
+        console.log(err)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-@import "@/scss/main.scss";
+@import '@/scss/main.scss';
 
 .products {
   display: flex;
