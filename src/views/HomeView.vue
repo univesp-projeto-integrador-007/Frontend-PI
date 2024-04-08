@@ -74,7 +74,7 @@ export default {
   methods: {
     HandleProduct(value) {
       this.$store.commit('storeCurrentProduct', value)
-      this.$router.push('/produtos')
+      this.$router.push(`/produto/${value._id}`)
     },
     handleFilter(value) {
       this.filter = value

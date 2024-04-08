@@ -11,13 +11,8 @@
       </p>
       <div class="product__container-product__wrapper" />
       <div>
-        <span class="product__container-product__value">{{
-          maskedMoney(product.price)
-        }}</span>
-        <span
-          v-if="product.oldPrice"
-          class="product__container-product__old-value"
-        >
+        <span class="product__container-product__value">{{ maskedMoney(product.price) }}</span>
+        <span v-if="product.oldPrice" class="product__container-product__old-value">
           {{ maskedMoney(product.oldPrice) }}
         </span>
       </div>
@@ -31,33 +26,48 @@
 </template>
 
 <script>
-import ProductCard from "@/components/ProductCard.vue";
-import Button from "@/components/Button.vue";
-import ConvertMoney from "@/helpers/convert-money";
+import Button from '@/components/Button.vue'
+import ProductCard from '@/components/ProductCard.vue'
+import ConvertMoney from '@/helpers/convert-money'
+import axios from 'axios'
 export default {
   components: { ProductCard, Button },
-  name: "ProductView",
+  name: 'ProductView',
   data() {
     return {
-      product: {},
-    };
+      product: {}
+    }
   },
-  created() {
-    this.product = this.$store.state.currentProduct;
+  async beforeMount() {
+    const id = this.$route.params.id
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND}api/products/${id}`)
+      this.product = res.data
+    } catch (err) {
+      console.log(err)
+    }
+    this.track()
   },
   methods: {
     addToCart(value) {
-      this.$store.commit("storeCart", value);
+      this.$store.commit('storeCart', value)
     },
     maskedMoney(value) {
-      return ConvertMoney(value);
+      return ConvertMoney(value)
     },
-  },
-};
+    track() {
+      this.$gtag.event(access, {
+        event_category: 'product',
+        event_label: 'produto',
+        value: this.product.name
+      })
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-@import "@/scss/main.scss";
+@import '@/scss/main.scss';
 
 .product {
   padding: 50px 150px 180px;
@@ -94,7 +104,7 @@ export default {
     }
 
     &__type {
-      font-family: "Cairo", sans-serif;
+      font-family: 'Cairo', sans-serif;
       font-weight: 700;
       font-size: 1.4rem;
       color: $brown-100;
