@@ -56,7 +56,7 @@ export default {
       return ConvertMoney(value)
     },
     track() {
-      this.$gtag.event(access, {
+      this.$gtag.event('access', {
         event_category: 'product',
         event_label: 'produto',
         value: this.product.name
